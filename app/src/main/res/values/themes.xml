@@ -1,9 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="Base.Theme.EterationChallenge" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Text Appearance Default for TextViews -->
+        <item name="android:textViewStyle">@style/TextStyle.EterationChallenge</item>
+        <item name="android:buttonStyle">@style/ButtonStyle.EterationChallenge</item>"
     </style>
 
+    <!-- Main Theme -->
     <style name="Theme.EterationChallenge" parent="Base.Theme.EterationChallenge" />
+
+    <!-- Text Appearance Definition -->
+    <style name="TextStyle.EterationChallenge" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="ButtonStyle.EterationChallenge" parent="Widget.AppCompat.Button">
+        <item name="textAllCaps">false</item>
+    </style>
 </resources>

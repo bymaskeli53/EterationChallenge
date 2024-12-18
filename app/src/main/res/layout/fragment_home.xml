@@ -14,18 +14,74 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/search_background"
         android:queryHint="Search"
+        app:queryHint="Search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:iconifiedByDefault="false"
+        app:searchHintIcon="@null"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@android:color/black"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-
+        android:layout_marginTop="@dimen/margin_16"
+        android:text="@string/filters"
+        app:fontFamily="@font/montserrat_semibold"
         app:layout_constraintStart_toStartOf="@id/search_view"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
-        tools:text="Filters:" />
+        app:layout_constraintTop_toBottomOf="@id/search_view" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_select_filter"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:background="@color/color_button_background"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/select_filter"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_view" />
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_select_filter">
+
+        <GridLayout
+            android:rowCount="2"
+            android:columnCount="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_item_product"/>
+            <include layout="@layout/shimmer_item_product"/>
+            <include layout="@layout/shimmer_item_product"/>
+            <include layout="@layout/shimmer_item_product"/>
+
+        </GridLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_products"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_16"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_select_filter" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
