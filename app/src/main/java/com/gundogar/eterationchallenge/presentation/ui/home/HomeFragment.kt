@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.gundogar.eterationchallenge.data.remote.ApiResult
@@ -23,7 +24,10 @@ import kotlinx.coroutines.launch
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: ProductViewModel by viewModels()
-    private val productAdapter by lazy { ProductAdapter() }
+    private val productAdapter by lazy { ProductAdapter(onItemClicked = {
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(it)
+        findNavController().navigate(action)
+    }) }
 
     override fun inflateBinding(
         inflater: LayoutInflater,

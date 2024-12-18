@@ -9,19 +9,19 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/search_background"
         android:queryHint="Search"
-        app:queryHint="Search"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:iconifiedByDefault="false"
-        app:searchHintIcon="@null"
-        android:textColorHint="@android:color/darker_gray"
-        android:textColor="@android:color/black"/>
+        app:queryHint="Search"
+        app:searchHintIcon="@null" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -34,9 +34,9 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_select_filter"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16"
+        android:layout_width="120dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="@dimen/margin_12"
         android:layout_marginEnd="@dimen/margin_16"
         android:background="@color/color_button_background"
         android:fontFamily="@font/montserrat"
@@ -55,19 +55,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_select_filter">
 
-        <GridLayout
-            android:rowCount="2"
-            android:columnCount="2"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <include layout="@layout/shimmer_item_product"/>
-            <include layout="@layout/shimmer_item_product"/>
-            <include layout="@layout/shimmer_item_product"/>
-            <include layout="@layout/shimmer_item_product"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        </GridLayout>
+                <include layout="@layout/shimmer_item_product" />
+
+                <include layout="@layout/shimmer_item_product" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <include layout="@layout/shimmer_item_product" />
+
+                <include layout="@layout/shimmer_item_product" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -75,8 +91,8 @@
         android:id="@+id/rv_products"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_8"
         android:visibility="gone"
-        android:layout_marginTop="@dimen/margin_16"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

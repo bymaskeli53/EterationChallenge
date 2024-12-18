@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/item_image"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/product_image_size"
         android:layout_height="@dimen/product_image_size"
         android:background="@color/light_gray"
         android:scaleType="centerCrop"
@@ -29,7 +29,7 @@
         android:id="@+id/item_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_8"
         android:text="15.000 ₺"
         android:textColor="@color/primary"
         android:textSize="14sp"

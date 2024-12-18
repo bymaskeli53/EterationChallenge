@@ -9,15 +9,19 @@ import coil.load
 import com.gundogar.eterationchallenge.data.model.Product
 import com.gundogar.eterationchallenge.databinding.ItemProductBinding
 
-class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
+class ProductAdapter(private val onItemClicked: (String) -> Unit = {}) :
+    ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
     inner class ProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.itemName.text = product.name
             binding.itemPrice.text = "${product.price} ₺"
-            binding.itemImage.load(product.image){
+            binding.itemImage.load(product.image) {
                 crossfade(true)
+            }
+            binding.root.setOnClickListener {
+                onItemClicked(product.id)
             }
         }
     }
@@ -33,6 +37,9 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(Pr
 }
 
 class ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
-    override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem == newItem
+    override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean =
+        oldItem.id == newItem.id
+
+    override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean =
+        oldItem == newItem
 }

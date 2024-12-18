@@ -6,4 +6,8 @@
     <string name="add_to_cart">Add to Cart</string>
     <string name="title">Title</string>
     <string name="filters">Filters:</string>
+    <string name="my_basket">My Basket</string>
+    <string name="home">Home</string>
+    <string name="favorites">Favorites</string>
+    <string name="profile">Profile</string>
 </resources>
