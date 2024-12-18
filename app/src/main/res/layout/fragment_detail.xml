@@ -1,15 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ui.detail.DetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tv_id"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="@dimen/image_width_in_detail"
+        android:layout_height="@dimen/image_height_in_detail"
+        android:layout_marginTop="@dimen/margin_16"
+        android:background="@color/light_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_favorite_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="@dimen/margin_8"
+        android:src="@drawable/ic_star"
+        app:layout_constraintEnd_toEndOf="@id/item_image"
+        app:layout_constraintTop_toTopOf="@id/item_image"
+        app:tint="@color/color_background_star" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_product_title"
+        android:layout_width="0dp"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_image"
+        tools:text="Apple Iphone 14 Pro max 256 GB" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_product_description"
+        android:layout_width="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_title"
+        tools:text="@string/lorem" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:text="12222222 ₺"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price"
+        android:textColor="@color/primary"
+        app:layout_constraintBottom_toTopOf="@id/tv_price"
+        app:layout_constraintStart_toStartOf="@id/tv_price" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_to_cart"
+        android:text="@string/add_to_cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/primary"
+        android:textColor="@color/white"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_width="160dp"
+        android:layout_height="40dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
