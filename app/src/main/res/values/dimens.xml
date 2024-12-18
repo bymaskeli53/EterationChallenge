@@ -4,6 +4,6 @@
     <dimen name="margin_8">8dp</dimen>
     <dimen name="product_image_size">140dp</dimen>
     <dimen name="margin_12">12dp</dimen>
-    <dimen name="image_width_in_detail">350dp</dimen>
+    <dimen name="image_width_in_detail">320dp</dimen>
     <dimen name="image_height_in_detail">220dp</dimen>
 </resources>

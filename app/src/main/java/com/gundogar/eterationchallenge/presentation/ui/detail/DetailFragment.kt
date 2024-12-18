@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import coil.load
 import com.gundogar.eterationchallenge.data.remote.ApiResult
 import com.gundogar.eterationchallenge.data.remote.ApiResult.Success
 import com.gundogar.eterationchallenge.databinding.FragmentDetailBinding
@@ -49,14 +50,24 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                 val state = viewModel.getProductDetail(productId)
                 when (state) {
                     is ApiResult.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
                     }
                     is Success -> {
+                        binding.progressBar.visibility = View.GONE
                         binding.tvPrice.text = state.data.price
                         binding.tvProductDescription.text = state.data.description
                         binding.tvProductTitle.text = state.data.model
+                        binding.itemImage.load(state.data.image) {
+                            crossfade(true)
+
+                        }
+
                     }
 
-                    is ApiResult.Error -> {}
+                    is ApiResult.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        // TODO: Error handling bakılacak
+                    }
                 }
             }
         }

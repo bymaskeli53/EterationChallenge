@@ -4,6 +4,7 @@
         <!-- Text Appearance Default for TextViews -->
         <item name="android:textViewStyle">@style/TextStyle.EterationChallenge</item>
         <item name="android:buttonStyle">@style/ButtonStyle.EterationChallenge</item>"
+        <item name="android:windowBackground">@color/background_color</item>
     </style>
 
     <!-- Main Theme -->

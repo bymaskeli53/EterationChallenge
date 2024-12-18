@@ -12,6 +12,7 @@
         android:layout_height="@dimen/image_height_in_detail"
         android:layout_marginTop="@dimen/margin_16"
         android:background="@color/light_gray"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,8 +30,8 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_product_title"
         android:layout_width="0dp"
-        android:layout_marginStart="@dimen/margin_16"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16"
         android:layout_marginTop="@dimen/margin_16"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -41,10 +42,10 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_product_description"
         android:layout_width="0dp"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_product_title"
         tools:text="@string/lorem" />
 
@@ -54,10 +55,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16"
         android:layout_marginBottom="@dimen/margin_16"
-        android:text="12222222 ₺"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="12222222 ₺" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -69,14 +70,23 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_to_cart"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:background="@color/primary"
         android:text="@string/add_to_cart"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/primary"
-        android:textColor="@color/white"
-        android:layout_marginBottom="@dimen/margin_16"
-        android:layout_marginEnd="@dimen/margin_16"
-        android:layout_width="160dp"
-        android:layout_height="40dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
