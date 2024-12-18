@@ -9,15 +9,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.gundogar.eterationchallenge.data.remote.ApiResult
-import com.gundogar.eterationchallenge.data.remote.ApiResult.Loading
-import com.gundogar.eterationchallenge.data.remote.ApiResult.Success
 import com.gundogar.eterationchallenge.databinding.FragmentHomeBinding
 import com.gundogar.eterationchallenge.presentation.ProductViewModel
 import com.gundogar.eterationchallenge.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -42,6 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeViewModel()
+
     }
 
     private fun setupRecyclerView() {
@@ -55,38 +55,45 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.products.collect { state ->
-                    when (state) {
-                        is Loading -> {
-                            showShimmerEffect(true)
-                        }
+                viewModel.products.collectLatest { pagingData ->
+                    productAdapter.submitData(pagingData)
+                }
+            }
+        }
 
-                        is Success -> {
-                            showShimmerEffect(false)
-                            productAdapter.submitList(state.data)
-                        }
-
-                        is ApiResult.Error -> {
-                            showShimmerEffect(false)
-                            state.message?.let { message ->
-                                Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
+        // LoadStateListener ile shimmer kontrolü
+        productAdapter.addLoadStateListener { loadState ->
+            when (loadState.refresh) { // İlk yükleme durumunu kontrol et
+                is LoadState.Loading -> {
+                    binding.shimmerContainer.startShimmer()
+                    binding.shimmerContainer.visibility = View.VISIBLE
+                    binding.rvProducts.visibility = View.GONE
+                }
+                is LoadState.NotLoading -> {
+                    binding.shimmerContainer.stopShimmer()
+                    binding.shimmerContainer.visibility = View.GONE
+                    binding.rvProducts.visibility = View.VISIBLE
+                }
+                is LoadState.Error -> {
+                    binding.shimmerContainer.stopShimmer()
+                    binding.shimmerContainer.visibility = View.GONE
+                    binding.rvProducts.visibility = View.VISIBLE
+                    Snackbar.make(binding.root, "Error loading data", Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
     }
+//    private fun showShimmerEffect(show: Boolean) {
+//        if (show) {
+//            binding.shimmerContainer.startShimmer()
+//            binding.shimmerContainer.visibility = View.VISIBLE
+//            binding.rvProducts.visibility = View.GONE
+//        } else {
+//            binding.shimmerContainer.stopShimmer()
+//            binding.shimmerContainer.visibility = View.GONE
+//            binding.rvProducts.visibility = View.VISIBLE
+//        }
+//    }
 
-    private fun showShimmerEffect(show: Boolean) {
-        if (show) {
-            binding.shimmerContainer.startShimmer()
-            binding.shimmerContainer.visibility = View.VISIBLE
-            binding.rvProducts.visibility = View.GONE
-        } else {
-            binding.shimmerContainer.stopShimmer()
-            binding.shimmerContainer.visibility = View.GONE
-            binding.rvProducts.visibility = View.VISIBLE
-        }
-    }
+
 }

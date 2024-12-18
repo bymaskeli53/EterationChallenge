@@ -1,14 +1,17 @@
 package com.gundogar.eterationchallenge.domain.usecase
 
+import androidx.paging.Pager
+import androidx.paging.PagingData
 import com.gundogar.eterationchallenge.data.model.Product
 import com.gundogar.eterationchallenge.data.remote.ApiResult
 import com.gundogar.eterationchallenge.domain.repository.ProductRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetAllProductsUseCase @Inject constructor(
     private val repository: ProductRepository
 ) {
-    suspend operator fun invoke(): ApiResult<List<Product>> {
+     operator fun invoke(): Flow<PagingData<Product>> {
         return repository.getAllProducts()
     }
 }

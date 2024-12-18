@@ -2,15 +2,15 @@ package com.gundogar.eterationchallenge.presentation.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.gundogar.eterationchallenge.data.model.Product
 import com.gundogar.eterationchallenge.databinding.ItemProductBinding
 
 class ProductAdapter(private val onItemClicked: (String) -> Unit = {}) :
-    ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
+    PagingDataAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
     inner class ProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -32,7 +32,8 @@ class ProductAdapter(private val onItemClicked: (String) -> Unit = {}) :
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val product = getItem(position)
+        product?.let { holder.bind(it) }
     }
 }
 
