@@ -1,13 +1,7 @@
 package com.gundogar.eterationchallenge.presentation
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.gundogar.eterationchallenge.R
 import com.gundogar.eterationchallenge.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
-   // private lateinit var  navController: NavController
+    // private lateinit var  navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 //        setupActionBarWithNavController(navController)
 //        binding.bottomNavigation.setupWithNavController(navController)
 
-
 //        navController.addOnDestinationChangedListener{_,destination,_ ->
 //            if (destination.id == R.id.detailFragment) {
 //                binding.bottomNavigation.visibility = View.INVISIBLE
@@ -39,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 //                binding.bottomNavigation.visibility = View.VISIBLE
 //            }
 //        }
-
     }
 
     fun updateToolbarTitle(title: String) {

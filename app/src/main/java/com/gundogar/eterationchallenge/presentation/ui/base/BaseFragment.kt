@@ -7,22 +7,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VB: ViewBinding> : Fragment() {
+abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     private var _binding: VB? = null
 
     protected val binding: VB
         get() = _binding ?: throw IllegalArgumentException("View Binding can not be null")
 
-    abstract fun inflateBinding(inflater: LayoutInflater,container: ViewGroup?) : VB
-
+    abstract fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = inflateBinding(inflater,container)
+        _binding = inflateBinding(inflater, container)
         return binding.root
     }
 
@@ -30,6 +29,4 @@ abstract class BaseFragment<VB: ViewBinding> : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

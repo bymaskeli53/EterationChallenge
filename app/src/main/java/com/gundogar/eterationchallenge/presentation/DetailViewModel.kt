@@ -10,5 +10,4 @@ class DetailViewModel @Inject constructor(
     private val getProductDetailUseCase: GetProductDetailUseCase
 ) : ViewModel() {
     suspend fun getProductDetail(productId: String) = getProductDetailUseCase(productId)
-
 }

@@ -1,6 +1,5 @@
 package com.gundogar.eterationchallenge.presentation.ui.detail
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,6 @@ import com.gundogar.eterationchallenge.data.remote.ApiResult.Success
 import com.gundogar.eterationchallenge.databinding.FragmentDetailBinding
 import com.gundogar.eterationchallenge.presentation.DetailViewModel
 import com.gundogar.eterationchallenge.presentation.MainActivity
-import com.gundogar.eterationchallenge.presentation.ProductViewModel
 import com.gundogar.eterationchallenge.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -40,12 +38,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
         val args: DetailFragmentArgs by navArgs()
         productId = args.id
 
-
         observeViewModel()
-
-
-
-
 
         (requireActivity() as MainActivity).updateToolbarTitle("Product Details")
     }
@@ -53,18 +46,15 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-             val state =viewModel.getProductDetail(productId)
+                val state = viewModel.getProductDetail(productId)
                 when (state) {
                     is ApiResult.Loading -> {
-
                     }
                     is Success -> {
                         binding.tvPrice.text = state.data.price
                         binding.tvProductDescription.text = state.data.description
                         binding.tvProductTitle.text = state.data.model
-
                     }
-
 
                     is ApiResult.Error -> {}
                 }

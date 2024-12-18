@@ -59,5 +59,4 @@ object NetworkModule {
     fun provideApiService(retrofit: Retrofit): ProductService {
         return retrofit.create(ProductService::class.java)
     }
-
 }

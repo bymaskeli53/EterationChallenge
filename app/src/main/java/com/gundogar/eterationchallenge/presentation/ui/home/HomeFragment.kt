@@ -24,10 +24,12 @@ import kotlinx.coroutines.launch
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: ProductViewModel by viewModels()
-    private val productAdapter by lazy { ProductAdapter(onItemClicked = {
-        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(it)
-        findNavController().navigate(action)
-    }) }
+    private val productAdapter by lazy {
+        ProductAdapter(onItemClicked = {
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(it)
+            findNavController().navigate(action)
+        })
+    }
 
     override fun inflateBinding(
         inflater: LayoutInflater,
@@ -87,6 +89,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             binding.rvProducts.visibility = View.VISIBLE
         }
     }
-
 }
-

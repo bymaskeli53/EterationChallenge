@@ -1,7 +1,92 @@
-formatting:
-  NoWildcardImports:
-    active: false
-
 style:
   WildcardImport:
     active: false
+  MagicNumber:
+    active: true
+    excludes:
+      - '**/theme/**'
+      - '**/ui/components/LinearProgress.kt'
+  ReturnCount:
+    active: true
+    max: 3
+
+naming:
+  FunctionNaming:
+    active: true
+    ignoreAnnotated: [ 'Composable' ]
+
+
+complexity:
+  LongParameterList:
+    active: true
+    functionThreshold: 8
+    constructorThreshold: 8
+    ignoreAnnotated: [ 'Composable' ]
+    excludes:
+      - '**/ui/theme/LLColor.kt'
+  TooManyFunctions:
+    active: true
+    thresholdInFiles: 15
+    thresholdInClasses: 15
+    thresholdInInterfaces: 15
+    ignoreAnnotated: [ ]
+    ignorePrivate: false
+    excludes: [ ]
+  LongMethod:
+    active: true
+    threshold: 60
+    ignoreAnnotated: [ 'Composable' ]
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: true
+    excludes:
+      - '**/data/repository/AuthRepositoryImpl.kt'
+      - '**/data/repository/VocabularyRepositoryImpl.kt'
+      - '**/data/repository/QuestionRepositoryImpl.kt'
+      - '**/common/util/SafeCall.kt'
+      - '**/data/repository/GoogleSignInManager.kt'
+  TooGenericExceptionThrown:
+    active: false
+
+formatting:
+  NewLineAtEndOfFile:
+    active: true
+    autoCorrect: true
+  NoWildcardImports:
+    active: false
+  SpacingBetweenDeclarationsWithAnnotations:
+    active: true
+    autoCorrect: true
+  NoMultipleSpaces:
+    active: true
+    autoCorrect: true
+  ConsecutiveBlankLines:
+    active: true
+    autoCorrect: true
+    maxBlankLines: 1
+  TrailingWhitespace:
+    active: true
+    autoCorrect: true
+  NoEmptyClassBody:
+    active: true
+    autoCorrect: true
+  SpacingAroundCurlyBraces:
+    active: true
+    autoCorrect: true
+    allowBlankLines: false
+  SpacingInsideParens:
+    active: true
+    autoCorrect: true
+  ModifierOrder:
+    active: true
+    autoCorrect: true
+  NoUnusedImports:
+    active: true
+    autoCorrect: true
+  SpacingAroundOperators:
+    active: true
+    autoCorrect: true
+  UnusedPrivateMember:
+    active: true
+    autoCorrect: true
