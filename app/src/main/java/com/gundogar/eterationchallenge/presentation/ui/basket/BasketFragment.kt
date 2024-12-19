@@ -15,7 +15,6 @@ import com.gundogar.eterationchallenge.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.Locale
 
 @AndroidEntryPoint
 class BasketFragment : BaseFragment<FragmentBasketBinding>() {
@@ -40,7 +39,7 @@ class BasketFragment : BaseFragment<FragmentBasketBinding>() {
                     adapter.submitList(it)
                     binding.rvProducts.adapter = adapter
 
-                    viewModel.totalPrice.collectLatest{
+                    viewModel.totalPrice.collectLatest {
                         binding.tvPrice.text = String.format("%.2f ₺", it)
                     }
                 }

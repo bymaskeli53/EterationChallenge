@@ -17,4 +17,6 @@
     <string name="total">Total:</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
+    <string name="filter">Filter</string>
+    <string name="sort_by">Sort By</string>
 </resources>
