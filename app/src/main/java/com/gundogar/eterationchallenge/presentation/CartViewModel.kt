@@ -28,7 +28,7 @@ class CartViewModel @Inject constructor(
     fun addToCart(cartItem: CartItem) {
         viewModelScope.launch {
             addCartItemUseCase(cartItem)
-           // loadCartItems()
+            loadCartItems()
         }
     }
 }

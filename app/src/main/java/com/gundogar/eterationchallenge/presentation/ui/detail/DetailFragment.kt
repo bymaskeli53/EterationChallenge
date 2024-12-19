@@ -19,6 +19,7 @@ import com.gundogar.eterationchallenge.presentation.DetailViewModel
 import com.gundogar.eterationchallenge.presentation.MainActivity
 import com.gundogar.eterationchallenge.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.getValue
 
@@ -72,6 +73,14 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                             cartViewModel.addToCart(cartItem)
                             println("Sepete eklendi: ${cartItem.name}")
                             cartViewModel.loadCartItems()
+                            viewLifecycleOwner.lifecycleScope.launch {
+                                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                                    cartViewModel.cartItems.collectLatest {
+                                        println("Room db : $it")
+                                    }
+                                }
+                            }
+
                             println("Room db : ${cartViewModel.cartItems.value}")
 
                         }
