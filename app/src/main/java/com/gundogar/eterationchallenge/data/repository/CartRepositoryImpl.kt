@@ -3,6 +3,7 @@ package com.gundogar.eterationchallenge.data.repository
 import com.gundogar.eterationchallenge.data.local.CartDao
 import com.gundogar.eterationchallenge.data.model.CartItem
 import com.gundogar.eterationchallenge.domain.repository.CartRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CartRepositoryImpl @Inject constructor(
@@ -16,7 +17,7 @@ class CartRepositoryImpl @Inject constructor(
         cartDao.deleteCartItem(cartItem)
     }
 
-    override suspend fun getCartItems(): List<CartItem> {
+    override fun getCartItems(): Flow<List<CartItem>> {
         return cartDao.getAllCartItems()
     }
 

@@ -1,6 +1,7 @@
 package com.gundogar.eterationchallenge.presentation
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -8,6 +9,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.gundogar.eterationchallenge.R
 import com.gundogar.eterationchallenge.databinding.ActivityMainBinding
+import com.gundogar.eterationchallenge.utils.invisible
+import com.gundogar.eterationchallenge.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,21 +34,23 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar.root)
         setupActionBarWithNavController(navController)
 
-        val badge = binding.bottomNavigation.getOrCreateBadge(R.id.basketFragment)
-        badge.isVisible = true
-        badge.number = 10
-        setSupportActionBar(binding.toolbar.root)
-//        navController = Navigation.findNavController(this, R.id.nav_host_fragment_main)
-//        setupActionBarWithNavController(navController)
-//        binding.bottomNavigation.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.detailFragment -> {
+                    binding.bottomNavigation.invisible()
+                }
 
-//        navController.addOnDestinationChangedListener{_,destination,_ ->
-//            if (destination.id == R.id.detailFragment) {
-//                binding.bottomNavigation.visibility = View.INVISIBLE
-//            } else {
-//                binding.bottomNavigation.visibility = View.VISIBLE
-//            }
-//        }
+                else -> {
+                    binding.bottomNavigation.show()
+                }
+            }
+
+            val badge = binding.bottomNavigation.getOrCreateBadge(R.id.basketFragment)
+            badge.isVisible = true
+            badge.number = 10
+            setSupportActionBar(binding.toolbar.root)
+
+        }
     }
 
     fun updateToolbarTitle(title: String) {

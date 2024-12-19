@@ -21,7 +21,9 @@ class CartViewModel @Inject constructor(
 
     fun loadCartItems() {
         viewModelScope.launch {
-            _cartItems.value = getCartItemsUseCase()
+             getCartItemsUseCase().collect{
+                 _cartItems.value = it
+             }
         }
     }
 

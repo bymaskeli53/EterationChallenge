@@ -19,6 +19,8 @@ import com.gundogar.eterationchallenge.data.paging.ProductsLoadStateAdapter
 import com.gundogar.eterationchallenge.databinding.FragmentHomeBinding
 import com.gundogar.eterationchallenge.presentation.ProductViewModel
 import com.gundogar.eterationchallenge.presentation.ui.base.BaseFragment
+import com.gundogar.eterationchallenge.utils.hide
+import com.gundogar.eterationchallenge.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -89,22 +91,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             when (loadState.refresh) { // İlk yükleme durumunu kontrol et
                 is LoadState.Loading -> {
                     binding.shimmerContainer.startShimmer()
-                    binding.shimmerContainer.visibility = View.VISIBLE
-                    binding.rvProducts.visibility = View.GONE
+                    binding.shimmerContainer.show()
+                    binding.rvProducts.hide()
                     handleError(loadState)
                 }
 
                 is LoadState.NotLoading -> {
                     binding.shimmerContainer.stopShimmer()
-                    binding.shimmerContainer.visibility = View.GONE
+                    binding.shimmerContainer.hide()
                     binding.rvProducts.isVisible = productAdapter.itemCount > 0
                     handleError(loadState)
                 }
 
                 is LoadState.Error -> {
                     binding.shimmerContainer.stopShimmer()
-                    binding.shimmerContainer.visibility = View.GONE
-                    binding.rvProducts.visibility = View.VISIBLE
+                    binding.shimmerContainer.hide()
+                    binding.rvProducts.show()
                     Snackbar.make(binding.root, "Error loading data", Snackbar.LENGTH_SHORT).show()
                     handleError(loadState)
                 }

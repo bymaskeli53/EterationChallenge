@@ -18,6 +18,8 @@ import com.gundogar.eterationchallenge.presentation.CartViewModel
 import com.gundogar.eterationchallenge.presentation.DetailViewModel
 import com.gundogar.eterationchallenge.presentation.MainActivity
 import com.gundogar.eterationchallenge.presentation.ui.base.BaseFragment
+import com.gundogar.eterationchallenge.utils.hide
+import com.gundogar.eterationchallenge.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -55,11 +57,11 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                 val state = viewModel.getProductDetail(productId)
                 when (state) {
                     is ApiResult.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBar.show()
                     }
 
                     is Success -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progressBar.hide()
                         binding.tvPrice.text = state.data.price
                         binding.tvProductDescription.text = state.data.description
                         binding.tvProductTitle.text = state.data.model
@@ -85,7 +87,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                     }
 
                     is ApiResult.Error -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progressBar.hide()
                         // TODO: Error handling bakılacak
                     }
                 }
