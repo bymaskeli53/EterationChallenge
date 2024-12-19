@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
-import com.gundogar.eterationchallenge.databinding.ItemLoadStateBinding
 import com.gundogar.eterationchallenge.R
-
+import com.gundogar.eterationchallenge.databinding.ItemLoadStateBinding
 
 class ProductsLoadStateViewHolder(
     private val binding: ItemLoadStateBinding,

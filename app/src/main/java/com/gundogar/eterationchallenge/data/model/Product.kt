@@ -18,5 +18,6 @@ fun Product.toCartItem(): CartItem {
         id = id,
         name = name,
         price = price,
-        quantity = 1)
+        quantity = 1
+    )
 }

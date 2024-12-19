@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
-
     // private lateinit var  navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +30,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setupWithNavController(navController)
         setSupportActionBar(binding.toolbar.root)
         setupActionBarWithNavController(navController)
-
-
 
         val badge = binding.bottomNavigation.getOrCreateBadge(R.id.basketFragment)
         badge.isVisible = true

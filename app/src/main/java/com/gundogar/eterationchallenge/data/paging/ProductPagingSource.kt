@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.gundogar.eterationchallenge.data.model.Product
 import com.gundogar.eterationchallenge.data.remote.ProductService
-import com.gundogar.eterationchallenge.domain.repository.ProductRepository
 
 class ProductPagingSource(
     private val productService: ProductService

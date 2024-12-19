@@ -45,7 +45,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeViewModel()
-
     }
 
     private fun setupRecyclerView() {
@@ -66,7 +65,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
             }
         }
-
 
 //            productAdapter.addLoadStateListener { loadState ->
 //                val isLoading = loadState.source.refresh is LoadState.Loading ||
@@ -122,5 +120,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             Toast.makeText(requireContext(), "${it.error}", Toast.LENGTH_LONG).show()
         }
     }
-
 }

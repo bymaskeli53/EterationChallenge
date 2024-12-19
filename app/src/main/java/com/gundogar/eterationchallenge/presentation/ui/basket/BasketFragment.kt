@@ -13,7 +13,6 @@ import com.gundogar.eterationchallenge.presentation.BasketAdapter
 import com.gundogar.eterationchallenge.presentation.CartViewModel
 import com.gundogar.eterationchallenge.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -31,19 +30,14 @@ class BasketFragment : BaseFragment<FragmentBasketBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.loadCartItems()
-        viewLifecycleOwner.lifecycleScope.launch{
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.cartItems.collect {
                     val adapter = BasketAdapter()
                     adapter.submitList(it)
                     binding.rvProducts.adapter = adapter
-
                 }
             }
-
         }
-
     }
-
-
 }

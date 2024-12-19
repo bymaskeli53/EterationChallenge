@@ -9,7 +9,7 @@ import com.gundogar.eterationchallenge.data.model.CartItem
 import com.gundogar.eterationchallenge.databinding.ItemBasketBinding
 
 class BasketAdapter(
-    private val onQuantityChanged: (String, Int) -> Unit = {_,_ ->}
+    private val onQuantityChanged: (String, Int) -> Unit = { _, _ -> }
 ) : ListAdapter<CartItem, BasketAdapter.BasketViewHolder>(BasketDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketViewHolder {
@@ -26,7 +26,7 @@ class BasketAdapter(
         fun bind(cartItem: CartItem) {
             binding.tvProductTitle.text = cartItem.name
             binding.tvProductPrice.text = cartItem.price
-           // binding.tvQuantity.text = cartItem.quantity.toString()
+            // binding.tvQuantity.text = cartItem.quantity.toString()
 
             binding.btnPlus.setOnClickListener {
                 onQuantityChanged(cartItem.id, cartItem.quantity + 1)

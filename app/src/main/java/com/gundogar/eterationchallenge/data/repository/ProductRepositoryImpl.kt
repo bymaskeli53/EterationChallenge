@@ -12,7 +12,6 @@ import com.gundogar.eterationchallenge.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-
 private const val PAGE_SIZE = 4
 private const val INITIAL_LOAD_SIZE = 4
 

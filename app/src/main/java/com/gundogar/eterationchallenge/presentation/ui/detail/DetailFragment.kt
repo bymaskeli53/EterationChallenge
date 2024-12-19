@@ -65,7 +65,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                         binding.tvProductTitle.text = state.data.model
                         binding.itemImage.load(state.data.image) {
                             crossfade(true)
-
                         }
 
                         binding.btnAddToCart.setOnClickListener {
@@ -82,9 +81,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                             }
 
                             println("Room db : ${cartViewModel.cartItems.value}")
-
                         }
-
                     }
 
                     is ApiResult.Error -> {
