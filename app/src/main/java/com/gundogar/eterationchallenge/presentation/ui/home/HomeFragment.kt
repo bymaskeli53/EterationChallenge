@@ -40,6 +40,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }, onAddToCartClicked = {
             val cartItem = it.toCartItem()
             cartViewModel.addToCart(cartItem)
+            cartViewModel.loadCartItems()
         }
         )
     }

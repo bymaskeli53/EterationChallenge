@@ -21,4 +21,7 @@ interface CartDao {
 
     @Query("UPDATE cart_items SET quantity = :quantity WHERE id = :id")
     suspend fun updateCartItemQuantity(id: String, quantity: Int)
+
+    @Query("SELECT SUM(price * quantity) FROM cart_items")
+    fun getTotalPrice(): Flow<Double>
 }

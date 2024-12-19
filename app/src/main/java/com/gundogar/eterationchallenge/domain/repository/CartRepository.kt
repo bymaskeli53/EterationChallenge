@@ -8,4 +8,5 @@ interface CartRepository {
     suspend fun removeFromCart(cartItem: CartItem)
     fun getCartItems(): Flow<List<CartItem>>
     suspend fun updateCartItemQuantity(id: String, quantity: Int)
+    fun getTotalPrice(): Flow<Double>
 }

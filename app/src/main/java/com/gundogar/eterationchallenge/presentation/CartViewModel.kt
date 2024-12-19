@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.gundogar.eterationchallenge.data.model.CartItem
 import com.gundogar.eterationchallenge.domain.usecase.AddCartItemUseCase
 import com.gundogar.eterationchallenge.domain.usecase.GetCartItemsUseCase
+import com.gundogar.eterationchallenge.domain.usecase.GetTotalPriceUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,15 +16,30 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(
     private val getCartItemsUseCase: GetCartItemsUseCase,
     private val addCartItemUseCase: AddCartItemUseCase,
+    private val getTotalPriceUseCase: GetTotalPriceUseCase
 ) : ViewModel() {
     private val _cartItems = MutableStateFlow<List<CartItem>>(emptyList())
     val cartItems: StateFlow<List<CartItem>> = _cartItems
+
+    /**
+     * Explicit backing fields will be updated when it becomes stable
+     */
+    private val _totalPrice = MutableStateFlow<Double>(0.0)
+    val totalPrice: StateFlow<Double> = _totalPrice
 
     fun loadCartItems() {
         viewModelScope.launch {
              getCartItemsUseCase().collect{
                  _cartItems.value = it
              }
+        }
+    }
+
+    fun getTotalPrice() {
+        viewModelScope.launch{
+            getTotalPriceUseCase().collect{
+                _totalPrice.value = it
+            }
         }
     }
 
