@@ -15,8 +15,10 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.gundogar.eterationchallenge.data.model.toCartItem
 import com.gundogar.eterationchallenge.data.paging.ProductsLoadStateAdapter
 import com.gundogar.eterationchallenge.databinding.FragmentHomeBinding
+import com.gundogar.eterationchallenge.presentation.CartViewModel
 import com.gundogar.eterationchallenge.presentation.ProductViewModel
 import com.gundogar.eterationchallenge.presentation.ui.base.BaseFragment
 import com.gundogar.eterationchallenge.utils.hide
@@ -29,11 +31,17 @@ import kotlinx.coroutines.launch
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: ProductViewModel by viewModels()
+    private val cartViewModel: CartViewModel by viewModels()
+
     private val productAdapter by lazy {
         ProductAdapter(onItemClicked = {
             val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(it)
             findNavController().navigate(action)
-        })
+        }, onAddToCartClicked = {
+            val cartItem = it.toCartItem()
+            cartViewModel.addToCart(cartItem)
+        }
+        )
     }
 
     override fun inflateBinding(
@@ -68,26 +76,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
 
-//            productAdapter.addLoadStateListener { loadState ->
-//                val isLoading = loadState.source.refresh is LoadState.Loading ||
-//                        loadState.append is LoadState.Loading ||
-//                        loadState.prepend is LoadState.Loading
-//                binding.shimmerContainer.isVisible = isLoading
-//                binding.rvProducts.isVisible = !isLoading
-//
-//                if (loadState.source.refresh is LoadState.Error) {
-//                    Snackbar.make(binding.root, "Error loading data", Snackbar.LENGTH_SHORT).show()
-//                }
-//            }
-
-        // LoadStateListener ile shimmer kontrolü
         productAdapter.addLoadStateListener { loadState ->
-//                binding.rvProducts.isVisible = loadState.source.refresh is LoadState.NotLoading
-//                binding.shimmerContainer.isVisible = loadState.source.refresh is LoadState.Loading
-//                if (loadState.source.refresh is LoadState.Error) {
-//                    Snackbar.make(binding.root, "Error loading data", Snackbar.LENGTH_SHORT).show()
-//                }
-
             when (loadState.refresh) { // İlk yükleme durumunu kontrol et
                 is LoadState.Loading -> {
                     binding.shimmerContainer.startShimmer()

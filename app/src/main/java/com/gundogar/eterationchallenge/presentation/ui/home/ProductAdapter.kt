@@ -9,7 +9,10 @@ import coil.load
 import com.gundogar.eterationchallenge.data.model.Product
 import com.gundogar.eterationchallenge.databinding.ItemProductBinding
 
-class ProductAdapter(private val onItemClicked: (String) -> Unit = {}) :
+class ProductAdapter(
+    private val onItemClicked: (String) -> Unit = {},
+    private val onAddToCartClicked: (Product) -> Unit = {}
+) :
     PagingDataAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
     inner class ProductViewHolder(private val binding: ItemProductBinding) :
@@ -22,6 +25,9 @@ class ProductAdapter(private val onItemClicked: (String) -> Unit = {}) :
             }
             binding.root.setOnClickListener {
                 onItemClicked(product.id)
+            }
+            binding.itemAddToCart.setOnClickListener {
+                    onAddToCartClicked(product)
             }
         }
     }
