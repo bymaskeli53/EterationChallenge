@@ -10,9 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.gundogar.eterationchallenge.data.model.toCartItem
 import com.gundogar.eterationchallenge.data.remote.ApiResult
 import com.gundogar.eterationchallenge.data.remote.ApiResult.Success
 import com.gundogar.eterationchallenge.databinding.FragmentDetailBinding
+import com.gundogar.eterationchallenge.presentation.CartViewModel
 import com.gundogar.eterationchallenge.presentation.DetailViewModel
 import com.gundogar.eterationchallenge.presentation.MainActivity
 import com.gundogar.eterationchallenge.presentation.ui.base.BaseFragment
@@ -24,6 +26,8 @@ import kotlin.getValue
 class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 
     private val viewModel: DetailViewModel by viewModels()
+
+    private val cartViewModel: CartViewModel by viewModels()
 
     private lateinit var productId: String
 
@@ -52,6 +56,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                     is ApiResult.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
+
                     is Success -> {
                         binding.progressBar.visibility = View.GONE
                         binding.tvPrice.text = state.data.price
@@ -59,6 +64,15 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
                         binding.tvProductTitle.text = state.data.model
                         binding.itemImage.load(state.data.image) {
                             crossfade(true)
+
+                        }
+
+                        binding.btnAddToCart.setOnClickListener {
+                            val cartItem = state.data.toCartItem()
+                            cartViewModel.addToCart(cartItem)
+                            println("Sepete eklendi: ${cartItem.name}")
+                            cartViewModel.loadCartItems()
+                            println("Room db : ${cartViewModel.cartItems.value}")
 
                         }
 

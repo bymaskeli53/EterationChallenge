@@ -23,6 +23,7 @@ class ProductAdapter(private val onItemClicked: (String) -> Unit = {}) :
             binding.root.setOnClickListener {
                 onItemClicked(product.id)
             }
+
         }
     }
 

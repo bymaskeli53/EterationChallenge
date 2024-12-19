@@ -21,7 +21,7 @@ class ProductViewModel @Inject constructor(
 
 //    val products: Flow<PagingData<Product>> = getProductsUseCase()
 //        .cachedIn(viewModelScope) // Cache the data in ViewModel's scope
-    val products: Flow<PagingData<Product>> = getProductsUseCase().cachedIn(viewModelScope)
+    val products: Flow<PagingData<Product>> = getProductsUseCase()
 
     private val _filteredProducts = MutableStateFlow<List<Product>>(emptyList())
     val filteredProducts: StateFlow<List<Product>> = _filteredProducts

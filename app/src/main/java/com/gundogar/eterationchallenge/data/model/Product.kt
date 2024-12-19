@@ -12,3 +12,11 @@ data class Product(
     @SerializedName("brand") val brand: String,
     @SerializedName("createdAt") val createdAt: String
 )
+
+fun Product.toCartItem(): CartItem {
+    return CartItem(
+        id = id,
+        name = name,
+        price = price,
+        quantity = 1)
+}
