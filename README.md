@@ -15,8 +15,10 @@ EterationChallenge, bir e-ticaret uygulaması için ürün listeleme, arama, sep
 - **Ürün Detayı:** Belirli bir ürüne ait ayrıntılı bilgilerin gösterilmesi.
 - **Arama Fonksiyonu:** Kullanıcılar, ürün isimlerine göre arama yaparak sonuçları filtreleyebilir.
 - **Sepet Yönetimi:** Ürünleri sepete ekleme, çıkarma, miktarlarını güncelleme ve toplam fiyat hesabı.
-- **Sıralama ve Filtreleme:** Ürünleri fiyata göre sıralama, belirli özelliklere göre filtreleme.
 - **Offline Desteği:** Room veritabanı ile yerel depolama.
+- **Badge gösterme:** Sepetteki ürün sayısını gösterir.
+- **Loading ve error handling:** Uygulamada Loading ve error handling yapıldı
+- **Header ve Footer:** Uygulamada internet kesilmesi gibi durumlarda header ve footer gösteriliyor.
 
 ## Mimari
 
@@ -39,5 +41,5 @@ Bu yaklaşım, modüllerin birbirinden gevşek bağlı olmasını, test edilebil
 - **Retrofit & OkHttp:** API istekleri.
 - **Room:** Yerel veritabanı yönetimi.
 - **Paging 3:** Büyük veri setlerini sayfalama ile yönetme.
-- **Coil (Varsayımsal):** Görsel yükleme.
+- **Coil:** Görsel yükleme.
 
