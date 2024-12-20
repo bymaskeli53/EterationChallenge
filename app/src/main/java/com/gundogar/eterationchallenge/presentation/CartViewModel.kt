@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.gundogar.eterationchallenge.data.model.CartItem
 import com.gundogar.eterationchallenge.domain.usecase.AddCartItemUseCase
 import com.gundogar.eterationchallenge.domain.usecase.DeleteCartItemUseCase
+import com.gundogar.eterationchallenge.domain.usecase.GetBasketItemCountUseCase
 import com.gundogar.eterationchallenge.domain.usecase.GetCartItemsUseCase
 import com.gundogar.eterationchallenge.domain.usecase.GetTotalPriceUseCase
 import com.gundogar.eterationchallenge.domain.usecase.UpdateCartItemUseCase
@@ -20,7 +21,8 @@ class CartViewModel @Inject constructor(
     private val addCartItemUseCase: AddCartItemUseCase,
     private val getTotalPriceUseCase: GetTotalPriceUseCase,
     private val updateCartItemUseCase: UpdateCartItemUseCase,
-    private val deleteCartItemUseCase: DeleteCartItemUseCase
+    private val deleteCartItemUseCase: DeleteCartItemUseCase,
+    private val getBasketItemCountUseCase: GetBasketItemCountUseCase
 ) : ViewModel() {
     private val _cartItems = MutableStateFlow<List<CartItem>>(emptyList())
     val cartItems: StateFlow<List<CartItem>> = _cartItems
@@ -30,6 +32,17 @@ class CartViewModel @Inject constructor(
      */
     private val _totalPrice = MutableStateFlow<Double>(0.0)
     val totalPrice: StateFlow<Double> = _totalPrice
+
+    private val _basketItemCount = MutableStateFlow<Int>(0)
+    val basketItemCount: StateFlow<Int> = _basketItemCount
+
+    fun getBasketItemCount() {
+        viewModelScope.launch {
+            getBasketItemCountUseCase().collect {
+                _basketItemCount.value = it
+            }
+        }
+    }
 
     fun loadCartItems() {
         viewModelScope.launch {

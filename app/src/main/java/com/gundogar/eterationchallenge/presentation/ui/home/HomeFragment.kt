@@ -81,14 +81,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            // Tüm ürünleri gözlemle
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.products.collectLatest { pagingData ->
                     productAdapter.submitData(pagingData)
                 }
             }
         }
-        // TODO: BUrayı kontrol et
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.filteredProducts.collectLatest { pagingData ->

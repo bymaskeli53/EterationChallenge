@@ -1,8 +1,11 @@
 package com.gundogar.eterationchallenge.presentation
 
 import android.os.Bundle
-import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -12,6 +15,7 @@ import com.gundogar.eterationchallenge.databinding.ActivityMainBinding
 import com.gundogar.eterationchallenge.utils.invisible
 import com.gundogar.eterationchallenge.utils.show
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -19,13 +23,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
-    // private lateinit var  navController: NavController
+    private val basketViewModel: CartViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // TODO: Shared view model ile badge bilgisi alınabilir
+        basketViewModel.getBasketItemCount()
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_main) as NavHostFragment
         navController = navHostFragment.navController
@@ -47,11 +52,22 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            val badge = binding.bottomNavigation.getOrCreateBadge(R.id.basketFragment)
-            badge.isVisible = true
-            badge.number = 10
+
+//
+//            val badge = binding.bottomNavigation.getOrCreateBadge(R.id.basketFragment)
+//            badge.isVisible = true
+//            badge.number = 10
             setSupportActionBar(binding.toolbar.root)
 
+        }
+        lifecycleScope.launch{
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                basketViewModel.basketItemCount.collect{
+                    val badge = binding.bottomNavigation.getOrCreateBadge(R.id.basketFragment)
+                    badge.isVisible = true
+                    badge.number = it
+                }
+            }
         }
     }
 

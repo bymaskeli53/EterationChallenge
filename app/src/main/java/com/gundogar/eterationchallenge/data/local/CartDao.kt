@@ -27,4 +27,10 @@ interface CartDao {
 
     @Query("DELETE FROM cart_items WHERE id = :id")
     suspend fun deleteCartItem(id: String)
+
+    /**
+     * To get number of items and show in badge
+     */
+    @Query("SELECT COUNT(*) FROM cart_items")
+    fun getBasketItemCount(): Flow<Int>
 }
