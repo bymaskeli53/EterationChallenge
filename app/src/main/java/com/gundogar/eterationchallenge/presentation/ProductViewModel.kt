@@ -15,37 +15,36 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
+
+/**
+ * ViewModel responsible for handling product listing and search operations.
+ *
+ * @property getProductsUseCase Use case for retrieving all products.
+ * @property getFilteredProductsUseCase Use case for retrieving filtered products based on a query.
+ */
 @HiltViewModel
 class ProductViewModel @Inject constructor(
     private val getProductsUseCase: GetAllProductsUseCase,
     private val getFilteredProductsUseCase: GetFilteredProductsUseCase
 ) : ViewModel() {
 
-    //    val products: Flow<PagingData<Product>> = getProductsUseCase()
-//        .cachedIn(viewModelScope) // Cache the data in ViewModel's scope
+
     val products: Flow<PagingData<Product>> = getProductsUseCase()
+
 
     val searchQuery = MutableStateFlow("")
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     val filteredProducts: Flow<PagingData<Product>> = searchQuery
-        .debounce(300) // Kullanıcının yazmayı bitirmesi için bekle
-        .distinctUntilChanged() // Aynı sorgular için işleme gerek yok
+        .debounce(300)
+        .distinctUntilChanged()
         .flatMapLatest { query ->
             if (query.isEmpty()) {
-                getProductsUseCase() // Tüm ürünler
+                getProductsUseCase()
             } else {
-                getFilteredProductsUseCase(query) // Filtrelenmiş ürünler
+                getFilteredProductsUseCase(query)
             }
         }
-
-//    private fun fetchProducts() {
-//        viewModelScope.launch {
-//            _products.value = ApiResult.Loading
-//            _products.value = getProductsUseCase()
-//        }
-//    }
-
     fun updateSearchQuery(query: String) {
         searchQuery.value = query
     }
