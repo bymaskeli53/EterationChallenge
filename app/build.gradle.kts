@@ -92,6 +92,7 @@ dependencies {
 
     // Paging 3
     implementation(libs.paging.runtime)
+    testImplementation(libs.androidx.paging.common)
 
     // Shimmer
     implementation(libs.shimmer)
