@@ -34,4 +34,11 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun getProductById(id: String): ApiResult<Product> {
         return safeApiCall { productService.getProductById(id) }
     }
+
+    override suspend fun searchProducts(query: String): Flow<PagingData<Product>> {
+        return Pager(
+            config = PagingConfig(pageSize = 4, initialLoadSize = 4),
+            pagingSourceFactory = { ProductPagingSource(productService, query) }
+        ).flow
+    }
 }

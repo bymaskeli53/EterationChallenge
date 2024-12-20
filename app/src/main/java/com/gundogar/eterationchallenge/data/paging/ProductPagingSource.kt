@@ -6,18 +6,23 @@ import com.gundogar.eterationchallenge.data.model.Product
 import com.gundogar.eterationchallenge.data.remote.ProductService
 
 class ProductPagingSource(
-    private val productService: ProductService
+    private val productService: ProductService,
+    private val query: String? = null
 ) : PagingSource<Int, Product>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
         return try {
-            val currentPage = params.key ?: 1
-            val response = productService.getAllProducts(page = currentPage) // API isteği
+            val page = params.key ?: 1
+            val products = if (query.isNullOrEmpty()) {
+                productService.getAllProducts(page)
+            } else {
+                productService.searchProducts(page, query)
+            }
 
             LoadResult.Page(
-                data = response,
-                prevKey = if (currentPage == 1) null else currentPage - 1,
-                nextKey = if (response.isEmpty()) null else currentPage + 1
+                data = products,
+                prevKey = if (page == 1) null else page - 1,
+                nextKey = if (products.isEmpty()) null else page + 1
             )
         } catch (e: Exception) {
             LoadResult.Error(e)
@@ -25,6 +30,6 @@ class ProductPagingSource(
     }
 
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
-        return state.anchorPosition?.let { state.closestPageToPosition(it)?.prevKey?.plus(1) }
+        return state.anchorPosition
     }
 }

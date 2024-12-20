@@ -14,4 +14,10 @@ interface ProductService {
     // Belirli bir ürünü ID ile getirir
     @GET("products/{id}")
     suspend fun getProductById(@Path("id") id: String): Product
+
+    @GET("products")
+    suspend fun searchProducts(
+        @Query("page") page: Int,
+        @Query("search") query: String
+    ): List<Product>
 }

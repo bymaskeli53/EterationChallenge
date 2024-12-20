@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetFilteredProductsUseCase @Inject constructor(
     private val repository: ProductRepository
 ) {
-    operator fun invoke(query: String): Flow<PagingData<Product>> {
-        return repository.getAllProducts()
+    suspend operator fun invoke(query: String): Flow<PagingData<Product>> {
+        return repository.searchProducts(query)
     }
 }

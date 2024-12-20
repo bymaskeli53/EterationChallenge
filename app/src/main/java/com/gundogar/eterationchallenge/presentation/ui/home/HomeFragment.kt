@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -55,6 +56,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupSearchView()
         observeViewModel()
     }
 
@@ -73,6 +75,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             // Tüm ürünleri gözlemle
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.products.collectLatest { pagingData ->
+                    productAdapter.submitData(pagingData)
+                }
+            }
+        }
+        // TODO: BUrayı kontrol et
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.filteredProducts.collectLatest { pagingData ->
                     productAdapter.submitData(pagingData)
                 }
             }
@@ -103,6 +113,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
             }
         }
+    }
+
+    private fun setupSearchView() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { viewModel.updateSearchQuery(it) }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { viewModel.updateSearchQuery(it) }
+                return true
+            }
+        })
     }
 
     private fun handleError(loadState: CombinedLoadStates) {

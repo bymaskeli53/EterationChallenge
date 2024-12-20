@@ -10,4 +10,6 @@ interface ProductRepository {
     fun getAllProducts(): Flow<PagingData<Product>>
 
     suspend fun getProductById(id: String): ApiResult<Product>
+
+    suspend fun searchProducts(query: String): Flow<PagingData<Product>>
 }
