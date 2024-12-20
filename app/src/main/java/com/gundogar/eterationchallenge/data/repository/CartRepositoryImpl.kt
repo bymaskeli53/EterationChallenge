@@ -28,4 +28,9 @@ class CartRepositoryImpl @Inject constructor(
     override fun getTotalPrice(): Flow<Double> {
         return cartDao.getTotalPrice()
     }
+
+    override suspend fun deleteCartItem(id: String) {
+        cartDao.deleteCartItem(id)
+    }
+
 }

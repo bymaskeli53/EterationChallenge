@@ -24,4 +24,7 @@ interface CartDao {
 
     @Query("SELECT SUM(price * quantity) FROM cart_items")
     fun getTotalPrice(): Flow<Double>
+
+    @Query("DELETE FROM cart_items WHERE id = :id")
+    suspend fun deleteCartItem(id: String)
 }
