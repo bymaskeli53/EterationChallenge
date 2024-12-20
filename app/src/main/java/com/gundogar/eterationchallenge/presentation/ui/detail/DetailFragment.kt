@@ -48,8 +48,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
         productId = args.id
 
         observeViewModel()
-
-
     }
 
     private fun observeViewModel() {

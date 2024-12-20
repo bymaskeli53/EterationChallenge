@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -13,14 +12,13 @@ import com.gundogar.eterationchallenge.R
 import com.gundogar.eterationchallenge.databinding.FragmentProductsBottomSheetBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class FilterProductsBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentProductsBottomSheetBinding? = null
     private val binding get() = _binding!!
 
-  //  private val viewModel: FilterViewModel by viewModels()
+    //  private val viewModel: FilterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,8 +45,8 @@ class FilterProductsBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 val behavior = BottomSheetBehavior.from(it)
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
                 behavior.isFitToContents = false // İçerik boyutuna göre küçülmesin
-                behavior.skipCollapsed = true   // Collapse durumunu atla
-                behavior.isDraggable = true    // İstenirse draggable olsun
+                behavior.skipCollapsed = true // Collapse durumunu atla
+                behavior.isDraggable = true // İstenirse draggable olsun
             }
         }
         return dialog
@@ -60,9 +58,8 @@ class FilterProductsBottomSheetDialogFragment : BottomSheetDialogFragment() {
             dismiss()
         }
         setupSortOptions()
-        //setupApplyButton()
+        // setupApplyButton()
     }
-
 
     private fun setupSortOptions() {
         binding.sortByGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -73,7 +70,7 @@ class FilterProductsBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 R.id.sortPriceLowToHigh -> "price"
                 else -> null
             }
-           // viewModel.updateSortOption(sortOption)
+            // viewModel.updateSortOption(sortOption)
         }
     }
 

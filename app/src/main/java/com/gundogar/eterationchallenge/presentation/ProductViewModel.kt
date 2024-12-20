@@ -21,9 +21,6 @@ class ProductViewModel @Inject constructor(
     private val getFilteredProductsUseCase: GetFilteredProductsUseCase
 ) : ViewModel() {
 
-
-
-
     //    val products: Flow<PagingData<Product>> = getProductsUseCase()
 //        .cachedIn(viewModelScope) // Cache the data in ViewModel's scope
     val products: Flow<PagingData<Product>> = getProductsUseCase()
@@ -41,7 +38,6 @@ class ProductViewModel @Inject constructor(
                 getFilteredProductsUseCase(query) // Filtrelenmiş ürünler
             }
         }
-
 
 //    private fun fetchProducts() {
 //        viewModelScope.launch {

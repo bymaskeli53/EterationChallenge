@@ -12,7 +12,7 @@ class SortAdapter(private val options: List<String>) : RecyclerView.Adapter<Sort
         RecyclerView.ViewHolder(binding.root) {
         fun bind(option: String, position: Int) {
             binding.sortByText.text = option
-           // binding.sortByRadioButton.isChecked = position == selectedPosition
+            // binding.sortByRadioButton.isChecked = position == selectedPosition
 //            binding.radioButton.setOnClickListener {
 //                val oldPosition = selectedPosition
 //                selectedPosition = position
@@ -36,5 +36,4 @@ class SortAdapter(private val options: List<String>) : RecyclerView.Adapter<Sort
     override fun getItemCount(): Int {
         return options.size
     }
-
 }

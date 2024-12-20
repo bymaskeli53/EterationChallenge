@@ -10,5 +10,4 @@ class UpdateCartItemUseCase @Inject constructor(
     suspend operator fun invoke(id: String, quantity: Int) {
         cartRepository.updateCartItemQuantity(id, quantity)
     }
-
 }

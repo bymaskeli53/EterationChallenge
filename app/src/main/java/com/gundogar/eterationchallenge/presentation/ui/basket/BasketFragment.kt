@@ -35,13 +35,15 @@ class BasketFragment : BaseFragment<FragmentBasketBinding>() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.cartItems.collectLatest {
-                    val adapter = BasketAdapter(onQuantityChanged = { id, quantity ->
-                        viewModel.updateQuantity(id, quantity)
-                        viewModel.getTotalPrice()
-                    },
+                    val adapter = BasketAdapter(
+                        onQuantityChanged = { id, quantity ->
+                            viewModel.updateQuantity(id, quantity)
+                            viewModel.getTotalPrice()
+                        },
                         onItemDeleted = { id ->
                             viewModel.deleteCartItem(id)
-                        })
+                        }
+                    )
                     adapter.submitList(it)
 
                     binding.rvProducts.adapter = adapter
@@ -52,6 +54,5 @@ class BasketFragment : BaseFragment<FragmentBasketBinding>() {
                 }
             }
         }
-
     }
 }

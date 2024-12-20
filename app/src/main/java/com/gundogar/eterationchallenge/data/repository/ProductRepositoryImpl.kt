@@ -19,7 +19,6 @@ class ProductRepositoryImpl @Inject constructor(
     private val productService: ProductService
 ) : ProductRepository {
 
-
     override fun getAllProducts(): Flow<PagingData<Product>> {
         return Pager(
             config = PagingConfig(pageSize = PAGE_SIZE, initialLoadSize = INITIAL_LOAD_SIZE),

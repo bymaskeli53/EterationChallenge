@@ -10,5 +10,4 @@ class GetBasketItemCountUseCase @Inject constructor(
     operator fun invoke(): Flow<Int> {
         return cartRepository.getBasketItemCount()
     }
-
 }

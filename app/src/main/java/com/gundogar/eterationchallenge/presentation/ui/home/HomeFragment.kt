@@ -36,16 +36,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val cartViewModel: CartViewModel by viewModels()
 
     private val productAdapter by lazy {
-        ProductAdapter(onItemClicked = {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(it)
-            findNavController().navigate(action)
-        }, onAddToCartClicked = {
-            val cartItem = it.toCartItem()
-            cartViewModel.addToCart(cartItem)
-            cartViewModel.loadCartItems()
-            Snackbar.make(requireView(),
-                getString(R.string.added_to_basket, cartItem.name), Snackbar.LENGTH_SHORT).show()
-        }
+        ProductAdapter(
+            onItemClicked = {
+                val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(it)
+                findNavController().navigate(action)
+            },
+            onAddToCartClicked = {
+                val cartItem = it.toCartItem()
+                cartViewModel.addToCart(cartItem)
+                cartViewModel.loadCartItems()
+                Snackbar.make(
+                    requireView(),
+                    getString(R.string.added_to_basket, cartItem.name),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         )
     }
 
@@ -146,4 +151,3 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 }
-

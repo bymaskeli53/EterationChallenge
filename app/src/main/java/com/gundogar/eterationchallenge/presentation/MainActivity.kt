@@ -52,17 +52,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-
 //
 //            val badge = binding.bottomNavigation.getOrCreateBadge(R.id.basketFragment)
 //            badge.isVisible = true
 //            badge.number = 10
             setSupportActionBar(binding.toolbar.root)
-
         }
-        lifecycleScope.launch{
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                basketViewModel.basketItemCount.collect{
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                basketViewModel.basketItemCount.collect {
                     val badge = binding.bottomNavigation.getOrCreateBadge(R.id.basketFragment)
                     badge.isVisible = true
                     badge.number = it
