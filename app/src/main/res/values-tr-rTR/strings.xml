@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EterationChallenge</string>
+    <string name="hello_blank_fragment">Merhaba boş fragment</string>
+    <string name="select_filter">Filtre Seçin</string>
+    <string name="add_to_cart">Sepete Ekle</string>
+    <string name="title">E-Market</string>
+    <string name="filters">Filtreler:</string>
+    <string name="my_basket">Sepetim</string>
+    <string name="home">Ana Sayfa</string>
+    <string name="favorites">Favoriler</string>
+    <string name="profile">Profil</string>
+
+    <!-- Lorem ipsum metni genelde placeholder olarak kullanıldığından aynen bırakıyoruz -->
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+
+    <string name="price">Fiyat:</string>
+    <string name="complete">Tamamla</string>
+    <string name="total">Toplam:</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="filter">Filtre</string>
+    <string name="sort_by">Sırala</string>
+    <string name="item_added">Ürün eklendi</string>
+    <string name="added_to_basket">Sepete eklendi: %1$s</string>
+</resources>
