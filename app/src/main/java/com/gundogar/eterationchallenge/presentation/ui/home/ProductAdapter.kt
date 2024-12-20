@@ -6,6 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.google.android.material.snackbar.Snackbar
 import com.gundogar.eterationchallenge.data.model.Product
 import com.gundogar.eterationchallenge.databinding.ItemProductBinding
 

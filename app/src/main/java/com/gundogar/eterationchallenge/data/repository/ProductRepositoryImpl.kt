@@ -22,7 +22,7 @@ class ProductRepositoryImpl @Inject constructor(
 //        return safeApiCall { productService.getAllProducts() }
 //    }
 
-    // TODO: Paging header ve footer eklenecek
+
 
     override fun getAllProducts(): Flow<PagingData<Product>> {
         return Pager(

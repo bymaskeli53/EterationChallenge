@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
+
             when (destination.id) {
                 R.id.detailFragment -> {
                     binding.bottomNavigation.invisible()
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
                 else -> {
                     binding.bottomNavigation.show()
+                    updateToolbarTitle("E-Market")
                 }
             }
 
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateToolbarTitle(title: String) {
-        binding.toolbar.toolbarTitle.text = "Product Detail"
+        binding.toolbar.toolbarTitle.text = title
     }
 
     override fun onSupportNavigateUp(): Boolean {

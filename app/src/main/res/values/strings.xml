@@ -19,4 +19,6 @@
     <string name="minus">-</string>
     <string name="filter">Filter</string>
     <string name="sort_by">Sort By</string>
+    <string name="item_added">Item added</string>
+    <string name="added_to_basket">Sepete eklendi: %1$s</string>
 </resources>

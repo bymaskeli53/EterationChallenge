@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.google.android.material.snackbar.Snackbar
 import com.gundogar.eterationchallenge.data.model.toCartItem
 import com.gundogar.eterationchallenge.data.remote.ApiResult
 import com.gundogar.eterationchallenge.data.remote.ApiResult.Success
@@ -48,7 +49,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 
         observeViewModel()
 
-        (requireActivity() as MainActivity).updateToolbarTitle("Product Details")
+
     }
 
     private fun observeViewModel() {
@@ -62,17 +63,25 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 
                     is Success -> {
                         binding.progressBar.hide()
+                        binding.btnAddToCart.show()
+                        binding.tvPrice.show()
                         binding.tvPrice.text = state.data.price
                         binding.tvProductDescription.text = state.data.description
-                        binding.tvProductTitle.text = state.data.model
+                        binding.tvProductTitle.text = state.data.name
                         binding.itemImage.load(state.data.image) {
                             crossfade(true)
                         }
+                        (requireActivity() as MainActivity).updateToolbarTitle(state.data.brand)
 
                         binding.btnAddToCart.setOnClickListener {
                             val cartItem = state.data.toCartItem()
                             cartViewModel.addToCart(cartItem)
                             println("Sepete eklendi: ${cartItem.name}")
+                            Snackbar.make(
+                                requireView(),
+                                "Sepete eklendi: ${cartItem.name}",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
                             cartViewModel.loadCartItems()
                             viewLifecycleOwner.lifecycleScope.launch {
                                 repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -88,7 +97,13 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
 
                     is ApiResult.Error -> {
                         binding.progressBar.hide()
-                        // TODO: Error handling bakılacak
+                        binding.btnAddToCart.hide()
+                        binding.tvPrice.hide()
+                        Snackbar.make(
+                            requireView(),
+                            state.exception?.message ?: "No data",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }

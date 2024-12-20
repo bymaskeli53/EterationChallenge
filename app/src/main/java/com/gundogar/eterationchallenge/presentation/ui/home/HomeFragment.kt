@@ -16,6 +16,7 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.gundogar.eterationchallenge.R
 import com.gundogar.eterationchallenge.data.model.toCartItem
 import com.gundogar.eterationchallenge.data.paging.ProductsLoadStateAdapter
 import com.gundogar.eterationchallenge.databinding.FragmentHomeBinding
@@ -42,6 +43,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             val cartItem = it.toCartItem()
             cartViewModel.addToCart(cartItem)
             cartViewModel.loadCartItems()
+            Snackbar.make(requireView(),
+                getString(R.string.added_to_basket, cartItem.name), Snackbar.LENGTH_SHORT).show()
         }
         )
     }
@@ -58,6 +61,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setupRecyclerView()
         setupSearchView()
         observeViewModel()
+
+        binding.btnSelectFilter.setOnClickListener {
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToFilterProductsBottomSheetDialogFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun setupRecyclerView() {
