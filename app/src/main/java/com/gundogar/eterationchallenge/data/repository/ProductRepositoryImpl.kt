@@ -18,10 +18,6 @@ private const val INITIAL_LOAD_SIZE = 4
 class ProductRepositoryImpl @Inject constructor(
     private val productService: ProductService
 ) : ProductRepository {
-//    override suspend fun getAllProducts(): ApiResult<List<Product>> {
-//        return safeApiCall { productService.getAllProducts() }
-//    }
-
 
 
     override fun getAllProducts(): Flow<PagingData<Product>> {
